@@ -1,0 +1,30 @@
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+
+image: atlassian/default-image:3
+
+pipelines:
+  default:
+    - step:
+          name: Tests on stage
+          script:
+            - echo "Run tests"
+            # - export DOCKER_BUILDKIT=1
+            # - docker-compose up -d --build
+            # - docker exec php-zelena composer install
+            # - docker exec php-zelena mv ./.env.testing_docker ./.env.testing
+            # - docker exec php-zelena php artisan test
+          # services:
+            # - docker
+    - step:
+          name: Deploy to server
+          deployment: test
+          script:
+            - echo "Deploying to test environment"
+            # - pipe: atlassian/ssh-run:0.2.2
+              # variables:
+                # SSH_USER: 'name'
+                # SERVER: '000.000.000.00'
+                # COMMAND: '/path/to/pipeline.sh'

@@ -1,25 +1,25 @@
 # CI/CD
-Методологія розробки та набір практик, що дозволяє забезпечити послідовний та автоматизований спосіб сборки, пакування та тестування додатків.
-CI (Continuous Integration) - перевірка програми (наприклад, складання модулів JS, PHP, та автоматизовані тести).
-CD (Continuous Delivery) - деплой додатку на сервер (оновлення змінених файлів на сервері, сборка модулів JS, PHP, проведення міграцій (приклад для laravel)).
-Детальніше можно почитати в google, обравши напралення, наприклад CI/CD для JS розробників, або для PHP і тд.
+A development methodology and set of practices that allows for a consistent and automated way of building, packaging and testing applications.
+CI (Continuous Integration) - verification of the program (for example, the compilation of JS, PHP modules, and automated tests).
+CD (Continuous Delivery) - deployment of the application to the server (updating changed files on the server, assembling JS, PHP modules, conducting migrations (example for laravel)).
+You can read more in Google by choosing a direction, for example CI/CD for JS developers, or for PHP, etc.
 
 ---
 
 ## 1. Bitbucket setup
-1. В існуючому проекті відкрити **"Repository settings"**.
-2. У розділі **"PIPELINES"** обрати пунк **"Settings"** та активувати **"Enable Pipelines"**.
-3. Обрати пункт **"SSH keys"** та згенерувати або додати існуючи ключи (вони будуть потрібні для CD, розгортання оновлення на сервері, тобто ці ключи потрібно щоб були саме на сервері)
+1. Open in an existing project **"Repository settings"**.
+2. In the section **"PIPELINES"** choose **"Settings"** and activate **"Enable Pipelines"**.
+3. Choose **"SSH keys"** and generate or add existing keys (they will be needed for CD, update deployment on the server, i.e. these keys must be on the server)
 
 ---
 
-## 2. Конфігурування файлу bitbucket-pipelines.yml
-1. Створити у корні репозиторія файл **bitbucket-pipelines.yml**.
-2. У файл для початку додати код, приведений у **[bitbucket-pipelines.yml](bitbucket-pipelines.yml)**.
-3. Ознайомитися з **[прикладами налаштуваняя файлу](https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/)** та внести необхідні для поточного проекту зміни.
+## 2. File configuration bitbucket-pipelines.yml
+1. Create a file in the root of the repository **bitbucket-pipelines.yml**.
+2. To start, add the code given in the file **[bitbucket-pipelines.yml](bitbucket-pipelines.yml)**.
+3. Check out the documentation **[examples of configuring the file](https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/)** and make necessary changes for the current project.
 
 ---
-## 3. Рекмоендації з налаштування
-1. Намагайтеся по максимуму виносити довгі послідобновті команд у зовнішні файли, щоб зробити файл налаштування bitbucket-pipelines.yml коротшим і зрозумілішим для інших розробників у команді.
-2. Налаштовувати проект спочатку локально у **docker**, а далі рогзортати у bitbucket середовищі вже з docker-compose.yml для запуску тестової зборки і автоматичних тестів (CI). Pipelines мають розширення docker для роботи з подібними проектами. Це дозволить не вказувати серію команд для встановлення linux додатків, необхідних для роботи проекта.
-3. Для CD використовувати **.sh** файли на сервері (Скрипти, що дозволяют запустити необхідні команди). Таким чином можно буде у файлі bitbucket-pipelines.yml викликати необхідний скрипт однією строкою, в якому вже будут вказані усі необхідні команди для деплою.
+## 3. Recommendations for setting
+1. Try to move long sequences of commands to external files as much as possible to make the bitbucket-pipelines.yml configuration file shorter and easier to understand for other developers on the team.
+2. First configure the project locally in **docker**, and then deploy it in the bitbucket environment already with docker-compose.yml to start the test build and automatic tests (CI). Pipelines have a docker extension to work with similar projects. This will allow you not to specify a series of commands to install linux applications necessary for the project to work.
+3. For CD, use **.sh** files on the server (script that allow you to run the necessary commands). In this way, it will be possible to call the necessary script in one line in the bitbucket-pipelines.yml file, which will already contain all the necessary commands for deployment.
